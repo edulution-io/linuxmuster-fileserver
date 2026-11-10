@@ -1,3 +1,22 @@
+linuxmuster-fileserver (1:7.4.0-0~edu) lmn74; urgency=low
+
+  * edulution fork. The package keeps its upstream name, so the epoch 1: is
+    what makes it win against the same package from deb.linuxmuster.net.
+    The package has no linuxmuster dependencies, so nothing else changes.
+  * e version carries the suffix ~edu on top of the epoch, so apt policy,
+    dpkg -l and the motd show at a glance that this is the edulution build
+    and not the upstream package. "~" sorts before the empty string, so
+    1:7.4.0-0~edu stays below a hypothetical 1:7.4.0-0 while still
+    outranking every upstream 7.x, which carries no epoch at all.
+  * The github-release job asks for contents: write. The repository's
+    default GITHUB_TOKEN permission is read, so creating the release would
+    have failed with a 403 on the first tag. Granting it on the job keeps
+    the default untouched for every other workflow.
+  * Release workflow publishes to edulution-io/edulution-package-server
+    instead of linuxmuster/deb, into the Ubuntu codename resolute.
+
+ -- Lukas Lukic-Spitznagel <lukas.spitznagel@netzint.de>  Fri, 13 Nov 2026 12:00:00 +0100
+
 linuxmuster-fileserver (7.4.0-0) lmn74; urgency=low
 
   * Add support for Ubuntu 26.04 LTS (Resolute Raccoon)
