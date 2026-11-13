@@ -1,3 +1,10 @@
+> [!NOTE]
+> **This is the edulution fork of [linuxmuster-fileserver](https://github.com/linuxmuster/linuxmuster-fileserver).**
+> We build on the great work of the linuxmuster.net community. Maintaining our own
+> fork gives us the flexibility to ship security fixes and new features to edulution
+> installations quickly, and we actively contribute our changes back to the community
+> project. The packages are published at [package.edulution.io](https://package.edulution.io).
+
 # Linuxmuster Fileserver
 
 This tool installs a file server and joins it to the Linuxmuster server's AD. The share is configured on the server for the specified school and can then be integrated into the Linuxmuster server via the DFS configuration. All home drives, share drives, and project drives are then located on the separate file server.
@@ -22,24 +29,33 @@ Primary maintainer | lukas.spitznagel@netzint.de
 
 ## Requirements
 
-- Ubuntu 26.04 LTS (Resolute Raccoon) — the platform the `lmn74` packages are built and tested on
+- Ubuntu 26.04 LTS (Resolute Raccoon) — the platform the edulution packages (suite `resolute`) are built and tested on
 - Time synchronisation via `chrony` (recommended), `ntpsec` or `systemd-timesyncd`. The `ntp` package no longer exists in Ubuntu 26.04.
 
-> For linuxmuster.net 7.3 / Ubuntu 24.04 use the `lmn73` repository instead.
+> The edulution fork covers linuxmuster.net 7.4 on Ubuntu 26.04 only. For linuxmuster.net 7.3 / Ubuntu 24.04 use the `lmn73` repository of linuxmuster.net.
 
 ## Installation
 
 ### 1. Import key
 
 ```bash
-wget -qO- "https://deb.linuxmuster.net/pub.gpg" | gpg --dearmour -o /usr/share/keyrings/linuxmuster.net.gpg
+curl -fsSL https://package.edulution.io/pub.gpg | sudo gpg --dearmor -o /usr/share/keyrings/edulution.gpg
 ```
 
 ### 2. Add repo
 
 ```bash
-sudo sh -c 'echo "deb [arch=amd64 signed-by=/usr/share/keyrings/linuxmuster.net.gpg] https://deb.linuxmuster.net/ lmn74 main" > /etc/apt/sources.list.d/lmn74.list'
+sudo tee /etc/apt/sources.list.d/edulution.sources > /dev/null <<'EOF'
+Types: deb
+URIs: https://package.edulution.io/
+Suites: resolute
+Components: main
+Signed-By: /usr/share/keyrings/edulution.gpg
+EOF
 ```
+
+> Packages from package.edulution.io depend on `edulution-archive-keyring`, which keeps
+> `/usr/share/keyrings/edulution.gpg` up to date from then on.
 
 ### 3. Update & install
 
