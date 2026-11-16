@@ -17,16 +17,6 @@ This tool installs a file server and joins it to the Linuxmuster server's AD. Th
 - Easy maintenance and updates (AD remains available during a file server restart or update)
 - Performance improvement (see [Performance improvement](#performance-improvement))
 
-## Maintenance Details
-Linuxmuster.net official | ✅  YES
-:---: | :---: 
-[Community support](https://ask.linuxmuster.net) | ✅  YES*
-Actively developed | ✅  YES
-Maintainer organisation |  Linuxmuster.NET
-Primary maintainer | lukas.spitznagel@netzint.de  
-    
-\* The linuxmuster community consist of people who are nice and happy to help. They are not directly involved in the development though, and might not be able to help in all cases.
-
 ## Requirements
 
 - Ubuntu 26.04 LTS (Resolute Raccoon) — the platform the edulution packages (suite `resolute`) are built and tested on
